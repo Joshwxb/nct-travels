@@ -1,9 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-// Removed Send, added CreditCard
-import { CheckCircle, AlertCircle, Clock, CreditCard } from 'lucide-react';
+import { CheckCircle, AlertCircle, Clock, CreditCard, MessageCircle } from 'lucide-react';
 
-// Animation variants - Strictly vertical for mobile stability
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -18,6 +16,8 @@ const cardVariants = {
 };
 
 const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => {
+  const businessNumber = "2347018424893";
+
   const getFlagCode = (typeName) => {
     const name = typeName.toLowerCase();
     if (name.includes("south africa")) return "za";
@@ -33,15 +33,18 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
     return null;
   };
 
-  // --- NEW WHATSAPP PAYMENT REDIRECT ---
   const handleWhatsAppPayment = () => {
-    const businessNumber = "+2347018424893";
     const message = `Hello NCT Travels! 👋%0A%0A` +
                     `I am interested in the *${type}* package.%0A` +
                     `*Price:* ₦${price.toLocaleString()}%0A%0A` +
                     `Please send your Account details so I can proceed with the payment for my visa application.`;
-    
-    window.location.href = `https://wa.me/${businessNumber}?text=${message}`;
+    window.open(`https://wa.me/${businessNumber}?text=${message}`, '_blank');
+  };
+
+  // --- NEW ENQUIRY FUNCTION ---
+  const handleWhatsAppEnquiry = () => {
+    const message = `Hello NCT Travels, I would like to get more information regarding the *${type}* package listed on your website.`;
+    window.open(`https://wa.me/${businessNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const flagCode = getFlagCode(type);
@@ -59,7 +62,6 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        
         <div className="absolute bottom-4 left-4 flex items-center gap-2 pr-4">
           {flagCode && (
             <img 
@@ -75,7 +77,6 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
       </div>
 
       <div className="p-5 flex flex-col flex-grow">
-        {/* Visa Details */}
         <div className="space-y-2 mb-4">
           {details.map((detail, i) => (
             <p key={i} className="text-[12px] text-slate-700 font-medium flex items-start gap-2 leading-relaxed">
@@ -84,7 +85,6 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
           ))}
         </div>
 
-        {/* Requirements Box */}
         <div className="bg-slate-50 p-4 rounded-2xl mb-4 border border-slate-100">
           <p className="text-[10px] font-bold text-slate-400 uppercase mb-2 flex items-center gap-1">
             <AlertCircle size={10} /> Requirements
@@ -98,7 +98,6 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
           </ul>
         </div>
 
-        {/* Timeline Badges */}
         {footerInfo && (
           <div className="mb-6 flex flex-wrap gap-2">
             {footerInfo.map((info, i) => (
@@ -109,7 +108,6 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
           </div>
         )}
 
-        {/* Pricing and Action */}
         <div className="mt-auto pt-4 border-t border-slate-50">
           <div className="flex justify-between items-end mb-4">
             <div className="flex flex-col">
@@ -120,9 +118,18 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
           
           <button 
             onClick={handleWhatsAppPayment}
-            className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-lg shadow-blue-100"
+            className="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold hover:bg-slate-900 transition-all flex items-center justify-center gap-2 active:scale-[0.98] shadow-lg shadow-blue-100 mb-3"
           >
             Pay & Apply <CreditCard size={18} />
+          </button>
+
+          {/* --- NEW WHATSAPP ENQUIRY LINK --- */}
+          <button 
+            onClick={handleWhatsAppEnquiry}
+            className="w-full text-slate-400 hover:text-green-500 text-[11px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors py-1"
+          >
+            <MessageCircle size={14} />
+            Chat via WhatsApp
           </button>
         </div>
       </div>
