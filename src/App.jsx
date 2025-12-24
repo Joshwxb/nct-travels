@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { PackageSection } from './components/PackageSection';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, MapPin, Send, MessageCircle, Clock, ArrowRight, Star } from 'lucide-react';
+import ReactPixel from 'react-facebook-pixel';
 
 // Component to fix scroll position on route change
 const ScrollToTop = () => {
@@ -20,6 +21,12 @@ const ContactSection = () => {
   const businessNumber = "23407018424893";
   
   const handleWhatsAppChat = () => {
+    // FB Pixel Tracking for General Chat
+    ReactPixel.track('Contact', {
+      content_name: 'General WhatsApp Inquiry',
+      method: 'WhatsApp Button'
+    });
+
     const message = "Hello NCT Travels, I'm interested in your visa services. Can I get more details?";
     window.open(`https://wa.me/${businessNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
@@ -100,6 +107,7 @@ const FloatingWhatsApp = () => {
       href={`https://wa.me/${businessNumber}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => ReactPixel.track('Contact', { content_name: 'Floating WhatsApp' })}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       whileHover={{ scale: 1.1 }}
@@ -111,7 +119,7 @@ const FloatingWhatsApp = () => {
   );
 };
 
-// --- ABOUT SECTION (INCLUDING TESTIMONIALS) ---
+// --- ABOUT SECTION ---
 const About = () => {
   const successImages = [
     { src: "/pic/1.jpg", label: "South Africa", status: "Visa Secured" },
@@ -224,6 +232,23 @@ const About = () => {
 };
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // 1. Initialize Facebook Pixel
+    const options = {
+      autoConfig: true,
+      debug: false,
+    };
+    // REPLACE 'YOUR_PIXEL_ID' with actual ID
+    ReactPixel.init('YOUR_PIXEL_ID_HERE', options);
+  }, []);
+
+  useEffect(() => {
+    // 2. Track Page View on every route change
+    ReactPixel.pageView();
+  }, [pathname]);
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100 selection:text-blue-600 overflow-x-hidden">
       <ScrollToTop />

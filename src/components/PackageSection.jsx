@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, AlertCircle, Clock, CreditCard, MessageCircle } from 'lucide-react';
+import ReactPixel from 'react-facebook-pixel';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -35,9 +36,16 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
   };
 
   const handleWhatsAppPayment = () => {
-    // Logic to handle both number prices and string prices (like Euro)
     const displayPrice = typeof price === 'number' ? `₦${price.toLocaleString()}` : price;
     
+    // FACEBOOK PIXEL TRACKING: Track as a Lead when they click pay
+    ReactPixel.track('Lead', {
+      content_name: type,
+      content_category: 'Visa Application',
+      value: typeof price === 'number' ? price : 0,
+      currency: typeof price === 'number' ? 'NGN' : 'EUR'
+    });
+
     const message = `Hello NCT Travels! 👋%0A%0A` +
                     `I am interested in the *${type}* package.%0A` +
                     `*Price:* ${displayPrice}%0A%0A` +
@@ -46,6 +54,12 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
   };
 
   const handleWhatsAppEnquiry = () => {
+    // FACEBOOK PIXEL TRACKING: Track as an Inquiry
+    ReactPixel.track('Contact', {
+      content_name: type,
+      method: 'WhatsApp'
+    });
+
     const message = `Hello NCT Travels, I would like to get more information regarding the *${type}* package listed on your website.`;
     window.open(`https://wa.me/${businessNumber}?text=${encodeURIComponent(message)}`, '_blank');
   };
@@ -57,7 +71,6 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
       variants={cardVariants}
       className="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-slate-100 flex flex-col h-full transition-all duration-300 hover:shadow-2xl group"
     >
-      {/* Header Image */}
       <div className="h-44 w-full relative shrink-0 overflow-hidden">
         <img 
           src={image} 
@@ -148,11 +161,11 @@ export const PackageSection = () => {
       price: "€3,700", 
       image: "/pic/b29e01bf-401f-4c1b-9b79-c35b824adf5e.jpg",
       details: [
-        "Netherlands, Norway, Romania, Italy, Germany Luxembourg, Ireland.) ",
+        "Netherlands, Norway, Romania, Italy, Germany, Luxembourg, Ireland",
         "Step 1: Registration (€500)",
         "Step 2: Job Offer/Contract (€1000)",
-        "Step 3: Work Permit Issuance & processing: €1200",
-        "step 4: Documentation Delivery & Embassy Booking: Included in processing (no separate fee).",
+        "Step 3: Work Permit (€1200)",
+        "Step 4: Booking & Delivery (Included)",
         "Final Step: After Visa Approval (€1000)"
       ],
       requirements: ["Passport Datapage", "Updated CV", "Academic Certs"],

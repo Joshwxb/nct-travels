@@ -1,10 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Mail, Send, MessageSquare, Instagram, Facebook, Twitter } from 'lucide-react';
+import ReactPixel from 'react-facebook-pixel';
 
 export const ContactSection = () => {
   // --- WHATSAPP REDIRECT LOGIC ---
   const handleWhatsAppChat = () => {
+    // 1. Track the Contact Event in Facebook Pixel
+    ReactPixel.track('Contact', {
+      content_name: 'General WhatsApp Inquiry',
+      method: 'Contact Section Card'
+    });
+
+    // 2. Redirect to WhatsApp
     const businessNumber = "2347018424893";
     const message = encodeURIComponent("Hello NCT Travels, I'm interested in your visa services. Can I get more details?");
     window.location.href = `https://wa.me/${businessNumber}?text=${message}`;
@@ -59,7 +67,7 @@ export const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-tighter">Email Support</p>
-                  <p className="text-lg font-black text-slate-900">nctcorporate@gmail.comp</p>
+                  <p className="text-lg font-black text-slate-900">nctcorporate@gmail.com</p>
                 </div>
               </div>
             </div>
@@ -109,7 +117,11 @@ export const ContactSection = () => {
                 ></textarea>
               </div>
 
-              <button className="w-full bg-blue-600 text-white py-5 rounded-[2rem] font-black text-lg shadow-xl shadow-blue-200 hover:bg-slate-900 hover:shadow-none transition-all flex items-center justify-center gap-3 group">
+              <button 
+                type="button"
+                onClick={() => ReactPixel.track('Contact', { content_name: 'Contact Form Inquiry' })}
+                className="w-full bg-blue-600 text-white py-5 rounded-[2rem] font-black text-lg shadow-xl shadow-blue-200 hover:bg-slate-900 hover:shadow-none transition-all flex items-center justify-center gap-3 group"
+              >
                 Send Inquiry 
                 <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
