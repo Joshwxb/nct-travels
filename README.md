@@ -1,16 +1,35 @@
-# React + Vite
+# NCT Travels - Professional Visa Services Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance, responsive travel agency website built with **React.js**, **Tailwind CSS**, and **Framer Motion**. This platform is designed to showcase visa packages and facilitate direct client-to-agent communication via WhatsApp.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dynamic Visa Grid**: Displays multiple visa categories (Schengen, Qatar, Oman, etc.) with real-time pricing and requirements.
+- **Installment Payment Logic**: Specialized display for European packages with 5-step payment structures.
+- **WhatsApp Integration**: Contextual "Pay & Apply" and "Inquiry" buttons that pre-fill WhatsApp messages based on the specific visa selected.
+- **Modern UI/UX**: Smooth animations using Framer Motion and a "Mobile-First" design approach.
+- **Proof of Success**: Integrated testimonial and approval sections to build client trust.
 
-## React Compiler
+## 🛠 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React (Vite)
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide-React
+- **Animations**: Framer Motion
+- **Hosting**: Vercel
 
-## Expanding the ESLint configuration
+## 📂 Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `src/components/Navbar.jsx`: Navigation and brand identity.
+- `src/components/Hero.jsx`: High-impact landing section.
+- `src/components/PackageSection.jsx`: The core engine of the site handling visa data and WhatsApp logic.
+- `src/App.jsx`: Main routing and layout assembly.
+
+## ✉️ Contact Integration
+
+The site uses a direct-to-WhatsApp protocol. 
+- **Business Number**: +234 701 842 4893
+- **Primary Email**: [nctcorporate@gmail.com]
+
+---
+*Created by [Your Olawoore Joshua] for NCT Travels.*
