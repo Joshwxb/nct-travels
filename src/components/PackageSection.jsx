@@ -87,7 +87,7 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
             />
           )}
           <div className="text-white font-bold text-lg leading-tight drop-shadow-md">
-             {type}
+              {type}
           </div>
         </div>
       </div>
@@ -156,21 +156,6 @@ const VisaCard = ({ type, price, details, requirements, footerInfo, image }) => 
 
 export const PackageSection = () => {
   const visas = [
-    { 
-      type: "Europe Standard (Schengen)", 
-      price: "€3,700", 
-      image: "/pic/b29e01bf-401f-4c1b-9b79-c35b824adf5e.jpg",
-      details: [
-        "Netherlands, Norway, Romania, Italy, Germany, Luxembourg, Ireland",
-        "Step 1: Registration (€500)",
-        "Step 2: Job Offer/Contract (€1000)",
-        "Step 3: Work Permit (€1200)",
-        "Step 4: Booking & Delivery (Included)",
-        "Final Step: After Visa Approval (€1000)"
-      ],
-      requirements: ["Passport Datapage", "Updated CV", "Academic Certs"],
-      footerInfo: ["Multi-Stage Processing", "Installments Allowed"]
-    },
     { 
       type: "South Africa E.Visa", 
       price: 1500000, 
@@ -266,6 +251,21 @@ export const PackageSection = () => {
       details: ["April 2026 Submission", "N400k balance on approval"],
       requirements: ["Datapage", "Passport photo"],
       footerInfo: ["30 Days Business Visa"]
+    },
+    { 
+      type: "Work in Europe", 
+      price: "N6,700,000", 
+      image: "/pic/b29e01bf-401f-4c1b-9b79-c35b824adf5e.jpg",
+      details: [
+        "Netherlands, Norway, Romania, Italy, Germany, Luxembourg, Ireland",
+        "Step 1: Registration (€500)",
+        "Step 2: Job Offer/Contract (€1000)",
+        "Step 3: Work Permit (€1200)",
+        "Step 4: Booking & Delivery (Included)",
+        "Final Step: After Visa Approval (€1000)"
+      ],
+      requirements: ["Passport Datapage", "Updated CV", "Academic Certs"],
+      footerInfo: ["Multi-Stage Processing", "Installments Allowed"]
     }
   ];
 
