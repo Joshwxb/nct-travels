@@ -63,7 +63,6 @@ const About = () => {
             viewport={{ once: true }}
             className="flex-1 w-full relative"
           >
-            {/* Inner motion wrapper for the vertical floating effect */}
             <motion.div
               animate={{ y: [0, -20, 0] }}
               transition={{
@@ -162,9 +161,13 @@ function App() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Initializing Pixel with autoConfig false to prioritize our custom validation triggers
-    const options = { autoConfig: false, debug: false };
-    ReactPixel.init('YOUR_PIXEL_ID', options); 
+    // Initializing with your specific Pixel ID
+    const options = { 
+        autoConfig: false, 
+        debug: true // Set to true to see logs in browser console
+    };
+    ReactPixel.init('475990075353935', options); 
+    ReactPixel.pageView();
   }, []);
 
   useEffect(() => {
